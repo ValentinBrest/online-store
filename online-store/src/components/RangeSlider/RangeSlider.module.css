@@ -1,0 +1,13 @@
+.range {
+	display: flex;
+	align-items: center;
+	padding-bottom: 20px;
+}
+
+.valueLeft {
+	padding-right: 20px;
+}
+
+.valueRight {
+	padding-left: 20px;
+}
