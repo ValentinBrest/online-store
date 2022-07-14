@@ -1,0 +1,22 @@
+.App {
+  margin: 0 auto;
+  min-height: 100%;
+  display: grid;
+  grid-template-areas: 
+    'header'
+    'main'
+    'footer';
+  grid-template-columns: 1fr; 
+  grid-template-rows: auto 1fr auto; 
+}
+
+.main {
+  padding: 10px 0;
+}
+
+.main__wrap {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  height: 100%;
+  gap: 20px;
+}
