@@ -10,7 +10,7 @@ const Search = ({ date, setProducts }) => {
                 type="search"
                 placeholder="Введите текст"
                 id="search"
-                class={cl.input}
+                className={cl.input}
                 onChange={(event) => setProducts(
                         date.filter((item) => {
                             return item.title

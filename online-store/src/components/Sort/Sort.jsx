@@ -36,7 +36,7 @@ const Sort = ({ setProducts, date}) => {
     return (
         <div className={cl.sort}>
             <div className={cl.title}>Сортировка</div>
-            <label for="select"></label>
+            <label htmlFor="select"></label>
             <select name="sort" id="select" onChange={handleChange}>
                 <option value="A">По названию, от А до Я</option>
                 <option value="Я">По названию, от Я до А</option>

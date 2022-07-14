@@ -17,7 +17,13 @@ const FilterByValues = ({ products }) => {
                 <div className={cl.producer}>
                     <span>Производитель:</span>
                     {filterProducer.map((_, i) => {
-                        return <Checkbox id={filterProducer[i].id} img={filterProducer[i].img} />;
+                        return (
+                            <Checkbox
+                                key={filterProducer[i].id}
+                                id={filterProducer[i].id}
+                                img={filterProducer[i].img}
+                            />
+                        );
                     })}
                 </div>
                 <div className={cl.cameras}>
@@ -25,6 +31,7 @@ const FilterByValues = ({ products }) => {
                     {filterProducer.map((_, i) => {
                         return (
                             <Checkbox
+                                key={filterCameras[i].id}
                                 id={filterCameras[i].id}
                                 quantity={filterCameras[i].quantity}
                             />
@@ -34,7 +41,13 @@ const FilterByValues = ({ products }) => {
                 <div className={cl.color}>
                     <span>Цвет:</span>
                     {filterProducer.map((_, i) => {
-                        return <Checkbox id={filterColor[i].id} color={filterColor[i].color} />;
+                        return (
+                            <Checkbox
+                                key={filterColor[i].id}
+                                id={filterColor[i].id}
+                                color={filterColor[i].color}
+                            />
+                        );
                     })}
                 </div>
                 <div className={cl.popular}>
