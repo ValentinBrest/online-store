@@ -1,0 +1,17 @@
+.button {
+	font-family: inherit;
+	padding: 15px 15px;
+	color: white;
+	background-color: rgb(91, 18, 159);
+	border: 0;
+	cursor: pointer;
+	transition: all .3s;
+}
+
+.button:hover {
+	opacity: 0.9;
+} 
+
+.button:active {
+	background-color: rgb(46, 46, 200);
+}
