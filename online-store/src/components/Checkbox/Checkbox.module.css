@@ -1,0 +1,101 @@
+/* для элемента input c type="radio" */
+.custom__radio {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+/* для элемента label связанного с .custom-radio */
+.custom__radio + label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+/* создание в label псевдоэлемента  before со следующими стилями */
+.custom__radio + label::before {
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    border: 1px solid rgb(165, 165, 165);
+    transition: all 0.3s;
+}
+
+/* стили при наведении курсора на радио */
+.custom__radio:not(:disabled):not(:checked) + label:hover::before {
+    border-color: #a6a6a6;
+    cursor: pointer;
+}
+
+.custom__radio:not(:disabled):not(:checked) + label:hover span {
+    color: #a6a6a6;
+}
+
+/* стили для активной радиокнопки (при нажатии на неё) */
+.custom__radio:not(:disabled):active + label::before {
+    background-color: transparent;
+    border-color: #a6a6a6;
+}
+.custom__color_radio:not(:disabled):active + label::before {
+    background-color: transparent;
+    border-color: #a6a6a6;
+}
+
+/* стили для радиокнопки, находящейся в состоянии checked */
+.custom__radio:checked + label::before {
+    border-color: var(--main-color);
+    background-color: var(--main-color);
+    box-shadow: 0px 4px 4px rgba(52, 15, 133, 0.345);
+}
+
+.custom__color_radio:checked + label::before {
+    box-shadow: 0px 4px 4px rgba(30, 13, 137, 0.75);
+    border-color: transparent;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.custom__radio:checked + label span {
+    color: rgb(0, 0, 0);
+}
+
+.label {
+    position: relative;
+    margin-right: 0.5em;
+}
+
+label img {
+	width: 100%;
+	height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+label span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    font-size: 16px;
+}
+
+.label__white {
+    background-color: white;
+}
+
+.label__yellow {
+    background-color: yellow;
+}
+
+.label__red {
+    background-color: red;
+}
+
+.label__grey {
+    background-color: grey;
+}
