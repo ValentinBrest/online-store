@@ -1,0 +1,25 @@
+.filter {
+	padding-top: 20px;
+}
+
+.filter__wrap {
+	padding-left: 20px;
+}
+
+.title {
+	text-align: center;
+	font-weight: 700;
+	padding-bottom: 10px;
+}
+
+.producer {
+	align-items: center;
+	line-height: 25px;
+}
+
+.producer span,
+.cameras span,
+.color span,
+.popular span {
+	display: block;
+}
