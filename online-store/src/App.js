@@ -16,7 +16,7 @@ function App() {
             <div className="main">
                 <div className="container">
                     <div className="main__wrap">
-                        <Filters date={date} setProducts={setProducts} />
+                        <Filters date={date} setProducts={setProducts} products={products} />
                         <ProductsList
                             setQuantityProducts={setQuantityProducts}
                             products={products}

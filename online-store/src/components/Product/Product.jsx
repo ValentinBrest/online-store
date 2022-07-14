@@ -18,7 +18,6 @@ const Product = (props) => {
                 return prevCount - 1;
             }); 
         }
-        console.log(isInCart)
     }
 	return (
         <div className={cl.product}>

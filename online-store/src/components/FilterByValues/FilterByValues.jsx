@@ -8,9 +8,9 @@ import {
     filterPopular,
 } from './../../layout/Filters/filtersType';
 
-const FilterByValues = () => {
+const FilterByValues = ({ products }) => {
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
-	return (
+    return (
         <div className={cl.filter}>
             <div className={cl.title}>Фильты по значению</div>
             <div className={cl.filter__wrap}>
