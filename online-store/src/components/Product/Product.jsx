@@ -19,6 +19,9 @@ const Product = (props) => {
             }); 
         }
     }
+    const color =
+        props.date.color === 'red' ? 'красный' : props.date.color === 'yellow' ? 'желтый' : 'белый';
+
 	return (
         <div className={cl.product}>
             <img className={cl.img} src={props.date.img} alt="product" />
@@ -27,7 +30,7 @@ const Product = (props) => {
                 <div className={cl.quantity}>Количество: {props.date.quantity}</div>
                 <div className={cl.year}>Год выхода: {props.date.yearOfRelease} г.</div>
                 <div className={cl.price}>Производитель: {props.date.producer}</div>
-                <div className={cl.mileage}>Цвет: {props.date.color}</div>
+                <div className={cl.mileage}>Цвет: {color}</div>
                 <div className={cl.mileage}>Количество камер: {props.date.numberOfCameras}</div>
                 <div className={cl.mileage}>Популярный: {props.date.isPopular ? 'Да' : 'Нет'}</div>
             </div>

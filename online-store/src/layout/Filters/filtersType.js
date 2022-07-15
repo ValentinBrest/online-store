@@ -1,14 +1,14 @@
 export const filterProducer = [
     {
-        id: 'apple',
+        id: 'Apple',
         img: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg',
     },
     {
-        id: 'samsung',
+        id: 'Samsung',
         img: 'https://i.pinimg.com/736x/e5/cb/66/e5cb66fe655e53d607210abe8015a7b0.jpg',
     },
     {
-        id: 'xiaomi',
+        id: 'Xiaomi',
         img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Xiaomi_logo_%282021-%29.svg/2048px-Xiaomi_logo_%282021-%29.svg.png',
     },
 ];

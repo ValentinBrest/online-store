@@ -11,7 +11,7 @@ const Filters = ({ setProducts, date, products}) => {
         <div className={cl.filters}>
             <Button className={cl.button}>Сброс фильтров</Button>
             <Button className={cl.button}>Сброс настроек</Button>
-            <FilterByValues products={products} />
+            <FilterByValues products={products} setProducts={setProducts} date={date} />
             <FilterByRanges />
             <Search setProducts={setProducts} date={date} />
             <Sort setProducts={setProducts} date={date} />

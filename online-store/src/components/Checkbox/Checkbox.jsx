@@ -1,7 +1,7 @@
 import React from 'react';
 import cl from './Checkbox.module.css'
 
-const Checkbox = ({id, img, quantity, color}) => {
+const Checkbox = ({id, img, quantity, color, onClick}) => {
     const whatColor =
         color == 'white'
             ? cl.label__white
@@ -19,7 +19,7 @@ const Checkbox = ({id, img, quantity, color}) => {
                 id={id}
                 className={`${cl.custom__radio} ${cl.custom__color_radio}`}
             />
-            <label htmlFor={id} className={`${whatColor} ${cl.label}`}>
+            <label htmlFor={id} className={`${whatColor} ${cl.label}`} onClick={onClick}>
                 {quantity ? <span>{quantity}</span> : <img src={img} alt="" />}
             </label>
         </>
