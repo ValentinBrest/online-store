@@ -8,95 +8,170 @@ import {
     filterPopular,
 } from './../../layout/Filters/filtersType';
 import { useState, useEffect } from 'react';
+import Search from '../Search/Search';
+import Sort from '../Sort/Sort';
+import FilterByRanges from '../FilterByRanges/FilterByRanges';
+import {
+    sortFromA,
+    sortFromZ,
+    fromMoreQuant,
+    fromLessQuant,
+    fromOldYear,
+    fromYoungYear,
+} from '../../utils/filterBy.js';
 
 const FilterByValues = ({ products, setProducts, date }) => {
-    const [curProducts, setCurProducts] = useState(products);
+    const [state, setState] = useState({
+        filters: {
+            sort: {
+                sortBy: ''
+            },
+            search: {
+                inputTerm: '',
+            },
+            range: {
+                quantityInStock: [1, 12],
+                yearOfRelease: [2000, 2022],
+            },
+            producer: {
+                Apple: false,
+                Samsung: false,
+                Xiaomi: false,
+            },
+            numberOfCameras: {
+                1: false,
+                2: false,
+                3: false,
+            },
+            color: {
+                white: false,
+                yellow: false,
+                red: false,
+            },
+            popular: {
+                isPopular: false,
+            },
+        },
+    });
 
-    const [popular, setPopular] = useState(false);
-    const [colors, setColors] = useState([]);
-    const [cameras, setCameras] = useState([]);
-    const [producers, setProducers] = useState([]);
-
-    const chooseProducer = (name) => {
-        if (producers.includes(name)) {
-            let index = producers.findIndex((prod) => prod === name);
-            let allProducers = [...producers];
-            allProducers.splice(index, 1);
-            setProducers(allProducers);
-            if (allProducers.length) {
-                setProducts(
-                    curProducts.filter((item) => item && allProducers.includes(item.producer))
-                );
-            } else {
-                setProducts(curProducts);
-            }
-        } else {
-            setProducers((prevState) => [...prevState, name]);
-            setCurProducts(products);
-            setProducts(
-                curProducts.filter(
-                    (item) => item.producer === name || producers.includes(item.producer)
-                )
-            );
-        }
+    const allFilterClickListener = (name, filterProp) => {
+        setState((prevState) => ({
+            filters: {
+                ...prevState.filters,
+                [filterProp]: {
+                    ...prevState.filters[filterProp],
+                    [name]: !prevState.filters[filterProp][name],
+                },
+            },
+        }));
     };
 
-    const chooseCameras = (q) => {
-        if (cameras.includes(q)) {
-            let index = cameras.findIndex((camera) => camera === q);
-            let allCameras = [...cameras];
-            allCameras.splice(index, 1);
-            setCameras(allCameras);
-            if (allCameras.length) {
-                setProducts(
-                    curProducts.filter((item) => item && allCameras.includes(item.numberOfCameras))
-                );
-            } else {
-                setProducts(curProducts);
-            }
-        } else {
-            setCameras((prevState) => [...prevState, q]);
-            setProducts(
-                curProducts.filter(
-                    (item) => item.numberOfCameras === q || cameras.includes(item.numberOfCameras)
-                )
-            );
+    const filteredCollected = () => {
+        const collectedTrueKeys = {
+            producer: [],
+            numberOfCameras: [],
+            color: [],
+            popular: [],
+        };
+        const { producer, numberOfCameras, color, popular } = state.filters;
+        for (let producerKey in producer) {
+            if (producer[producerKey]) collectedTrueKeys.producer.push(producerKey);
         }
+        for (let numberOfCamerasKey in numberOfCameras) {
+            if (numberOfCameras[numberOfCamerasKey]) collectedTrueKeys.numberOfCameras.push(numberOfCamerasKey);
+        }
+        for (let colorKey in color) {
+            if (color[colorKey]) collectedTrueKeys.color.push(colorKey);
+        }
+        for (let popularKey in popular) {
+            if (popular[popularKey]) collectedTrueKeys.popular.push(popularKey);
+        }
+        return collectedTrueKeys;
+    };
+
+    const multiPropsFilter = (products, filters) => {
+        const filterKeys = Object.keys(filters);
+        const res = products.filter((product) => {
+            return filterKeys.every((key) => {
+                if (!filters[key].length) return true;
+                if (Array.isArray(product[key])) {
+                    return product[key].some((keyEle) => filters[key].includes(keyEle));
+                }
+                return filters[key].includes(product[key]);
+            });
+        });
+        setProducts(res);
+        return res;
+    };
+
+    const enterText = (e) => {
+        setState((prevState) => ({
+            filters: {
+                ...prevState.filters,
+                search: {
+                    inputTerm: e.target.value.toLowerCase(),
+                },
+            },
+        }));
     }
 
-    const chooseColor = (id) => {
-        if (colors.includes(id)) {
-            let index = colors.findIndex(color => color === id);
-            let allColor = [...colors]
-            allColor.splice(index, 1);
-            setColors(allColor);
-            if (allColor.length) {
-                setProducts(curProducts.filter((item) => item && allColor.includes(item.color)));
-            } else {
-                setProducts(curProducts);
+    const changeSort = (e) => {
+        setState((prevState) => ({
+            filters: {
+                ...prevState.filters,
+                sort: {
+                    sortBy: e.target.value,
+                },
+            },
+        }));
+    };
+
+    const sortProducts = (value, arrSort) => {
+            switch (value) {
+                case 'A':
+                    return([...sortFromA(arrSort)]);
+                case 'Я':
+                    return([...sortFromZ(arrSort)]);
+                case 'yearIncr':
+                    return([...fromOldYear(arrSort)]);
+                case 'yearDecr':
+                    return([...fromYoungYear(arrSort)]);
+                case 'quanIncr':
+                    return([...fromLessQuant(arrSort)]);
+                case 'quanDecr':
+                    return([...fromMoreQuant(arrSort)]);
+                default:
+                    return arrSort
             }
-        } else {
-            setColors((prevState) => [...prevState, id]);
-            setProducts(
-                curProducts.filter((item) => item.color === id || colors.includes(item.color))
-            );
-        }
     }
 
-    const onlyPopular = () => {
-        
-        if (!popular) {
-            setProducts( products.filter((item) => item.isPopular))
-            setCurProducts(products)
-            setPopular(true)
-        } else {
-            setCurProducts(products);
-            setProducts(curProducts);
-            setPopular(false);
-        }
-    }   
+    const changeRange = (arr) => {
+        return arr.filter(
+            (item) =>
+                item.quantity >= state.filters.range.quantityInStock[0] &&
+                item.quantity <= state.filters.range.quantityInStock[1] &&
+                item.yearOfRelease >= state.filters.range.yearOfRelease[0] &&
+                item.yearOfRelease <= state.filters.range.yearOfRelease[1]
+        );
+    }
+
+    const searchProducts = () => {
+        const filteredProducts = multiPropsFilter(date, filteredCollected());
+        const filtredSort = sortProducts(state.filters.sort.sortBy, filteredProducts);
+        const filtredRange = changeRange(filtredSort);
+        setProducts(
+            filtredRange.filter((product) => {
+                return product.title.toLowerCase().includes(state.filters.search.inputTerm);
+            })
+        );
+    };
+
     
-    useEffect(() => console.log(curProducts), [curProducts]);
+
+    useEffect(() => {
+        searchProducts()
+        console.log(state)
+    }, [state]);
 
     return (
         <div className={cl.filter}>
@@ -110,33 +185,42 @@ const FilterByValues = ({ products, setProducts, date }) => {
                                 key={filterProducer[i].id}
                                 id={filterProducer[i].id}
                                 img={filterProducer[i].img}
-                                onClick={() => chooseProducer(filterProducer[i].id)}
+                                onClick={() =>
+                                    allFilterClickListener(filterProducer[i].id, 'producer')
+                                }
                             />
                         );
                     })}
                 </div>
                 <div className={cl.cameras}>
                     <span>Количество камер:</span>
-                    {filterProducer.map((_, i) => {
+                    {filterCameras.map((_, i) => {
                         return (
                             <Checkbox
                                 key={filterCameras[i].id}
                                 id={filterCameras[i].id}
-                                quantity={filterCameras[i].quantity}
-                                onClick={() => chooseCameras(filterCameras[i].quantity)}
+                                quantity={filterCameras[i].numberOfCameras}
+                                onClick={() =>
+                                    allFilterClickListener(
+                                        filterCameras[i].numberOfCameras,
+                                        'numberOfCameras'
+                                    )
+                                }
                             />
                         );
                     })}
                 </div>
                 <div className={cl.color}>
                     <span>Цвет:</span>
-                    {filterProducer.map((_, i) => {
+                    {filterColor.map((_, i) => {
                         return (
                             <Checkbox
                                 key={filterColor[i].id}
                                 id={filterColor[i].id}
                                 color={filterColor[i].color}
-                                onClick={() => chooseColor(filterColor[i].id)}
+                                onClick={() =>
+                                    allFilterClickListener(filterColor[i].color, 'color')
+                                }
                             />
                         );
                     })}
@@ -146,12 +230,17 @@ const FilterByValues = ({ products, setProducts, date }) => {
                     {
                         <Checkbox
                             id={filterPopular[0].id}
-                            color={filterPopular[0].id}
-                            onClick={() => onlyPopular()}
+                            isPopular={filterPopular[0].isPopular}
+                            onClick={() =>
+                                allFilterClickListener(filterPopular[0].isPopular, 'popular')
+                            }
                         />
                     }
                 </div>
             </div>
+            <Search enterText={enterText} />
+            <Sort changeSort={changeSort} />
+            <FilterByRanges setState={setState} />
         </div>
     );
 };

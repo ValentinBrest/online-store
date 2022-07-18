@@ -1,8 +1,7 @@
 import React from 'react';
 import cl from './Search.module.css';
-import { useState } from 'react';
 
-const Search = ({ date, setProducts }) => {
+const Search = ({ enterText }) => {
     return (
         <div className={cl.search}>
             <div className={cl.title}>Поиск</div>
@@ -11,14 +10,7 @@ const Search = ({ date, setProducts }) => {
                 placeholder="Введите текст"
                 id="search"
                 className={cl.input}
-                onChange={(event) => setProducts(
-                        date.filter((item) => {
-                            return item.title
-                                .toLowerCase()
-                                .includes(event.target.value.toLowerCase());
-                        })
-                    )
-                }
+                onChange={(e) => enterText(e)}
             />
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import cl from './Checkbox.module.css'
 
-const Checkbox = ({id, img, quantity, color, onClick}) => {
+const Checkbox = ({id, img, quantity, color, isPopular, onClick}) => {
     const whatColor =
         color == 'white'
             ? cl.label__white
@@ -9,7 +9,7 @@ const Checkbox = ({id, img, quantity, color, onClick}) => {
             ? cl.label__yellow
             : color == 'red'
             ? cl.label__red
-            : color == 'grey'
+            : isPopular == 'true'
             ? cl.label__grey
             : '';
 	return (

@@ -1,43 +1,14 @@
 import React from 'react';
 import cl from './Sort.module.css';
-import {
-    sortFromA,
-    sortFromZ, 
-	fromMoreQuant,
-    fromLessQuant,
-    fromOldYear,
-    fromYoungYear,
-} from '../../utils/filterBy.js';
 
-const Sort = ({ setProducts, date}) => {
-    const handleChange = (event) => {
-		switch (event.target.value) {
-            case 'A':
-                setProducts([...sortFromA(date)]);
-                break;
-            case 'Я':
-                setProducts([...sortFromZ(date)]);
-                break;
-            case 'yearIncr':
-                setProducts([...fromOldYear(date)]);
-                break;
-            case 'yearDecr':
-                setProducts([...fromYoungYear(date)]);
-                break;
-            case 'quanIncr':
-                setProducts([...fromLessQuant(date)]);
-                break;
-            case 'quanDecr':
-                setProducts([...fromMoreQuant(date)]);
-                break;
-        }
-    }
 
+const Sort = ({ changeSort }) => {
     return (
         <div className={cl.sort}>
             <div className={cl.title}>Сортировка</div>
             <label htmlFor="select"></label>
-            <select name="sort" id="select" onChange={handleChange}>
+            <select name="sort" id="select" onChange={(e) => changeSort(e)}>
+                <option value="" >По умолчанию</option>
                 <option value="A">По названию, от А до Я</option>
                 <option value="Я">По названию, от Я до А</option>
                 <option value="yearIncr">По году, по возрастанию</option>

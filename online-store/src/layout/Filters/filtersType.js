@@ -16,15 +16,15 @@ export const filterProducer = [
 export const filterCameras = [
     {
         id: 1,
-        quantity: 1,
+        numberOfCameras: '1',
     },
     {
         id: 2,
-        quantity: 2,
+        numberOfCameras: '2',
     },
     {
         id: 3,
-        quantity: 3,
+        numberOfCameras: '3',
     },
 ];
 
@@ -45,7 +45,7 @@ export const filterColor = [
 
 export const filterPopular = [
     {
-        id: 'grey',
-        color: 'grey',
+        id: 'popular',
+        isPopular: 'true',
     },
 ];
