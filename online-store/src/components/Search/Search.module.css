@@ -13,3 +13,8 @@
 	height: 30px;
 	font-family: inherit;
 }
+
+.input:focus {
+	border: 1px solid transparent;
+	outline: 2px solid rgb(118, 25, 206);
+}

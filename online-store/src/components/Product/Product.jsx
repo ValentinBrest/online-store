@@ -3,7 +3,7 @@ import cl from './Product.module.css';
 import Button from './../Button/Button';
 
 
-const Product = ({ setQuantityProducts, product, setDate, data }) => {
+const Product = ({ setQuantityProducts, product, setDate, data, quantityProducts }) => {
     const addCart = () => {
         if (!product.isInCart) {
             setDate(() => [...data, (product.isInCart = true)]);
@@ -34,7 +34,11 @@ const Product = ({ setQuantityProducts, product, setDate, data }) => {
                 <div className={cl.mileage}>Популярный: {product.isPopular ? 'Да' : 'Нет'}</div>
             </div>
             <Button className={product.isInCart ? cl.buttonToCart : cl.button} onClick={addCart}>
-                {product.isInCart ? 'Товар добавлен в корзину' : 'Добавить в корзину'}
+                {quantityProducts >= 5 && !product.isInCart
+                    ? 'Извините, все слоты заполнены'
+                    : quantityProducts < 5 && !product.isInCart
+                    ? 'Добавить товар в корзину'
+                    : 'Товар добавлен в корзину'}
             </Button>
         </div>
     );

@@ -10,7 +10,8 @@ const Header = ({ quantityProducts }) => {
                         <a href="#">Online Shop</a>
                     </h1>
                     <div className={cl.header__kart}>
-                        <div className={cl.header__count}>{quantityProducts}</div>
+                        <div className={cl.header__count}>{quantityProducts}
+                        </div>
                     </div>
                 </div>
             </div>

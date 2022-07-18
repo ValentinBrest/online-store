@@ -23,6 +23,7 @@ function App() {
                             setDate={setDate}
                             setQuantityProducts={setQuantityProducts}
                             products={products}
+                            quantityProducts={quantityProducts}
                         />
                     </div>
                 </div>

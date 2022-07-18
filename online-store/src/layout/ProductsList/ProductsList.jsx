@@ -2,7 +2,7 @@ import React from 'react';
 import Product from '../../components/Product/Product';
 import cl from './Products.module.css';
 
-const ProductsList = ({ setQuantityProducts, products, setDate, data }) => {
+const ProductsList = ({ setQuantityProducts, products, setDate, data, quantityProducts }) => {
     return (
         <div className={cl.products}>
             {products.length === 0 ? (
@@ -16,6 +16,7 @@ const ProductsList = ({ setQuantityProducts, products, setDate, data }) => {
                             key={item.title}
                             setQuantityProducts={setQuantityProducts}
                             setDate={setDate}
+                            quantityProducts={quantityProducts}
                         />
                     );
                 })
