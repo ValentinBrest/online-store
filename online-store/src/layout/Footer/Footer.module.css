@@ -4,8 +4,9 @@
     height: 150px;
     font-weight: 700;
     letter-spacing: 3px;
-	background: red;
+	background: rgb(91, 18, 159);
     margin-top: auto;
+    color:white;
 }
 .footer__wrap {
     display: flex;

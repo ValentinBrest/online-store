@@ -8,7 +8,8 @@ import { date } from './products';
 
 function App() {
     const [quantityProducts, setQuantityProducts] = useState(0);
-    const [products, setProducts] = useState(date);
+    const [data, setDate] = useState(date);
+    const [products, setProducts] = useState(data);
 
     return (
         <div className="App">
@@ -16,8 +17,10 @@ function App() {
             <div className="main">
                 <div className="container">
                     <div className="main__wrap">
-                        <Filters date={date} setProducts={setProducts} products={products} />
+                        <Filters date={data} setProducts={setProducts} />
                         <ProductsList
+                            data={data}
+                            setDate={setDate}
                             setQuantityProducts={setQuantityProducts}
                             products={products}
                         />

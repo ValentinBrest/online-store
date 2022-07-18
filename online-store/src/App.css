@@ -19,4 +19,5 @@
   grid-template-columns: 300px 1fr;
   height: 100%;
   gap: 20px;
+  position: relative;
 }

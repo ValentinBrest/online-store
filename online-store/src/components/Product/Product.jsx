@@ -1,41 +1,40 @@
 import React from 'react';
 import cl from './Product.module.css';
 import Button from './../Button/Button';
-import { useState } from 'react';
 
 
-const Product = (props) => {
-    const [isInCart, setIsInCart] = useState(false);
+const Product = ({ setQuantityProducts, product, setDate, data }) => {
     const addCart = () => {
-        if (!isInCart) {
-            setIsInCart(true)
-            props.setQuantityProducts((prevCount) => {
-                return prevCount + 1
-            }) 
+        if (!product.isInCart) {
+            setDate(() => [...data, (product.isInCart = true)]);
+            setQuantityProducts((prevCount) => {
+                return prevCount + 1;
+            });
         } else {
-            setIsInCart(false)
-            props.setQuantityProducts((prevCount) => {
+            setDate(() => [...data, (product.isInCart = false)]);
+            setQuantityProducts((prevCount) => {
                 return prevCount - 1;
-            }); 
+            });
         }
-    }
-    const color =
-        props.date.color === 'red' ? 'красный' : props.date.color === 'yellow' ? 'желтый' : 'белый';
+    };
 
-	return (
+    const color =
+        product.color === 'red' ? 'красный' : product.color === 'yellow' ? 'желтый' : 'белый';
+
+    return (
         <div className={cl.product}>
-            <img className={cl.img} src={props.date.img} alt="product" />
-            <h2 className={cl.title}>{props.date.title}</h2>
+            <img className={cl.img} src={product.img} alt="product" />
+            <h2 className={cl.title}>{product.title}</h2>
             <div className={cl.characteristic}>
-                <div className={cl.quantity}>Количество: {props.date.quantity}</div>
-                <div className={cl.year}>Год выхода: {props.date.yearOfRelease} г.</div>
-                <div className={cl.price}>Производитель: {props.date.producer}</div>
+                <div className={cl.quantity}>Количество: {product.quantity}</div>
+                <div className={cl.year}>Год выхода: {product.yearOfRelease} г.</div>
+                <div className={cl.price}>Производитель: {product.producer}</div>
                 <div className={cl.mileage}>Цвет: {color}</div>
-                <div className={cl.mileage}>Количество камер: {props.date.numberOfCameras}</div>
-                <div className={cl.mileage}>Популярный: {props.date.isPopular ? 'Да' : 'Нет'}</div>
+                <div className={cl.mileage}>Количество камер: {product.numberOfCameras}</div>
+                <div className={cl.mileage}>Популярный: {product.isPopular ? 'Да' : 'Нет'}</div>
             </div>
-            <Button className={isInCart ? cl.buttonToCart : cl.button} onClick={addCart}>
-                {isInCart ? 'Товар добавлен в корзину' : 'Добавить в корзину'}
+            <Button className={product.isInCart ? cl.buttonToCart : cl.button} onClick={addCart}>
+                {product.isInCart ? 'Товар добавлен в корзину' : 'Добавить в корзину'}
             </Button>
         </div>
     );

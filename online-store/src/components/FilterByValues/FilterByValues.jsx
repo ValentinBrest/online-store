@@ -20,7 +20,7 @@ import {
     fromYoungYear,
 } from '../../utils/filterBy.js';
 
-const FilterByValues = ({ products, setProducts, date }) => {
+const FilterByValues = ({ setProducts, date }) => {
     const [state, setState] = useState({
         filters: {
             sort: {
@@ -166,11 +166,8 @@ const FilterByValues = ({ products, setProducts, date }) => {
         );
     };
 
-    
-
     useEffect(() => {
         searchProducts()
-        console.log(state)
     }, [state]);
 
     return (

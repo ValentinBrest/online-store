@@ -8,6 +8,7 @@ export const date = [
         numberOfCameras: '3',
         popular: 'true',
         img: 'https://rs-online-store.netlify.app/assets/toys/7.png',
+        isInCart: false,
     },
     {
         title: 'Samsung Galaxy S20',
@@ -18,6 +19,7 @@ export const date = [
         numberOfCameras: '1',
         popular: 'false',
         img: 'https://rs-online-store.netlify.app/assets/toys/3.png',
+        isInCart: false,
     },
     {
         title: 'Apple iPhone 13',
@@ -28,6 +30,7 @@ export const date = [
         numberOfCameras: '3',
         popular: 'false',
         img: 'https://rs-online-store.netlify.app/assets/toys/8.png',
+        isInCart: false,
     },
     {
         title: 'Xiaomi Poco X4 pro',
@@ -38,6 +41,7 @@ export const date = [
         numberOfCameras: '2',
         popular: 'false',
         img: 'https://rs-online-store.netlify.app/assets/toys/4.png',
+        isInCart: false,
     },
     {
         title: 'Apple iPhone SE',
@@ -48,6 +52,7 @@ export const date = [
         numberOfCameras: '1',
         popular: 'false',
         img: 'https://rs-online-store.netlify.app/assets/toys/10.png',
+        isInCart: false,
     },
     {
         title: 'Samsung Galaxy A03',
@@ -58,6 +63,7 @@ export const date = [
         numberOfCameras: '2',
         popular: 'false',
         img: 'https://rs-online-store.netlify.app/assets/toys/2.png',
+        isInCart: false,
     },
     {
         title: 'Xiaomi Redmi Note 11',
@@ -68,6 +74,7 @@ export const date = [
         numberOfCameras: '1',
         popular: 'true',
         img: 'https://rs-online-store.netlify.app/assets/toys/5.png',
+        isInCart: false,
     },
     {
         title: 'Apple iPhone 12',
@@ -78,6 +85,7 @@ export const date = [
         numberOfCameras: '3',
         popular: 'false',
         img: 'https://rs-online-store.netlify.app/assets/toys/9.png',
+        isInCart: false,
     },
     {
         title: 'Samsung Galaxy S21',
@@ -88,6 +96,7 @@ export const date = [
         numberOfCameras: '3',
         popular: 'false',
         img: 'https://rs-online-store.netlify.app/assets/toys/1.png',
+        isInCart: false,
     },
     {
         title: 'Xiaomi Redmi 9C 3/64gb',
@@ -98,5 +107,6 @@ export const date = [
         numberOfCameras: '2',
         popular: 'false',
         img: 'https://rs-online-store.netlify.app/assets/toys/6.png',
+        isInCart: false,
     },
 ];

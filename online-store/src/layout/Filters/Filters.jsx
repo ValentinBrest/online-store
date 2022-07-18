@@ -3,13 +3,12 @@ import Button from '../../components/Button/Button';
 import FilterByValues from '../../components/FilterByValues/FilterByValues';
 import cl from './Filters.module.css';
 
-const Filters = ({ setProducts, date, products}) => {
+const Filters = ({ setProducts, date}) => {
     return (
         <div className={cl.filters}>
             <Button className={cl.button}>Сброс фильтров</Button>
             <Button className={cl.button}>Сброс настроек</Button>
-            <FilterByValues products={products} setProducts={setProducts} date={date} />
-            
+            <FilterByValues  setProducts={setProducts} date={date} />
         </div>
     );
 };

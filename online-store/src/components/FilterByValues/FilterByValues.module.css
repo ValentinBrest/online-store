@@ -5,6 +5,9 @@
 .filter__wrap {
 	padding-left: 20px;
 }
+.filter__wrap>* {
+  margin-bottom: 10px;
+}
 
 .title {
 	text-align: center;
@@ -22,4 +25,5 @@
 .color span,
 .popular span {
 	display: block;
+	margin-bottom: 5px;
 }

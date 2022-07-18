@@ -3,5 +3,10 @@
 	grid-template-columns: repeat(3, 280px);
 	justify-content: space-between;
 	gap: 10px;
-	border: 1px solid #222;
+}
+
+.sorry {
+	font-size: 24px;
+	font-weight: 700;
+	color: rgb(55, 9, 98);
 }
