@@ -34,9 +34,9 @@ const Product = ({ setQuantityProducts, product, setDate, data, quantityProducts
                 <div className={cl.mileage}>Популярный: {product.isPopular ? 'Да' : 'Нет'}</div>
             </div>
             <Button className={product.isInCart ? cl.buttonToCart : cl.button} onClick={addCart}>
-                {quantityProducts >= 5 && !product.isInCart
+                {quantityProducts >= 20 && !product.isInCart
                     ? 'Извините, все слоты заполнены'
-                    : quantityProducts < 5 && !product.isInCart
+                    : quantityProducts < 20 && !product.isInCart
                     ? 'Добавить товар в корзину'
                     : 'Товар добавлен в корзину'}
             </Button>

@@ -46,6 +46,7 @@ export const filterColor = [
 export const filterPopular = [
     {
         id: 'popular',
-        isPopular: 'true',
+        value: false,
+        isPopular: 'isPopular',
     },
 ];

@@ -20,40 +20,7 @@ import {
     fromYoungYear,
 } from '../../utils/filterBy.js';
 
-const FilterByValues = ({ setProducts, date }) => {
-    const [state, setState] = useState({
-        filters: {
-            sort: {
-                sortBy: ''
-            },
-            search: {
-                inputTerm: '',
-            },
-            range: {
-                quantityInStock: [1, 12],
-                yearOfRelease: [2000, 2022],
-            },
-            producer: {
-                Apple: false,
-                Samsung: false,
-                Xiaomi: false,
-            },
-            numberOfCameras: {
-                1: false,
-                2: false,
-                3: false,
-            },
-            color: {
-                white: false,
-                yellow: false,
-                red: false,
-            },
-            popular: {
-                isPopular: false,
-            },
-        },
-    });
-
+const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
     const allFilterClickListener = (name, filterProp) => {
         setState((prevState) => ({
             filters: {
@@ -78,7 +45,8 @@ const FilterByValues = ({ setProducts, date }) => {
             if (producer[producerKey]) collectedTrueKeys.producer.push(producerKey);
         }
         for (let numberOfCamerasKey in numberOfCameras) {
-            if (numberOfCameras[numberOfCamerasKey]) collectedTrueKeys.numberOfCameras.push(numberOfCamerasKey);
+            if (numberOfCameras[numberOfCamerasKey])
+                collectedTrueKeys.numberOfCameras.push(numberOfCamerasKey);
         }
         for (let colorKey in color) {
             if (color[colorKey]) collectedTrueKeys.color.push(colorKey);
@@ -113,9 +81,10 @@ const FilterByValues = ({ setProducts, date }) => {
                 },
             },
         }));
-    }
+    };
 
     const changeSort = (e) => {
+        getSort(e.target.value);
         setState((prevState) => ({
             filters: {
                 ...prevState.filters,
@@ -127,23 +96,23 @@ const FilterByValues = ({ setProducts, date }) => {
     };
 
     const sortProducts = (value, arrSort) => {
-            switch (value) {
-                case 'A':
-                    return([...sortFromA(arrSort)]);
-                case 'Я':
-                    return([...sortFromZ(arrSort)]);
-                case 'yearIncr':
-                    return([...fromOldYear(arrSort)]);
-                case 'yearDecr':
-                    return([...fromYoungYear(arrSort)]);
-                case 'quanIncr':
-                    return([...fromLessQuant(arrSort)]);
-                case 'quanDecr':
-                    return([...fromMoreQuant(arrSort)]);
-                default:
-                    return arrSort
-            }
-    }
+        switch (value) {
+            case 'A':
+                return [...sortFromA(arrSort)];
+            case 'Я':
+                return [...sortFromZ(arrSort)];
+            case 'yearIncr':
+                return [...fromOldYear(arrSort)];
+            case 'yearDecr':
+                return [...fromYoungYear(arrSort)];
+            case 'quanIncr':
+                return [...fromLessQuant(arrSort)];
+            case 'quanDecr':
+                return [...fromMoreQuant(arrSort)];
+            default:
+                return arrSort;
+        }
+    };
 
     const changeRange = (arr) => {
         return arr.filter(
@@ -153,7 +122,7 @@ const FilterByValues = ({ setProducts, date }) => {
                 item.yearOfRelease >= state.filters.range.yearOfRelease[0] &&
                 item.yearOfRelease <= state.filters.range.yearOfRelease[1]
         );
-    }
+    };
 
     const searchProducts = () => {
         const filteredProducts = multiPropsFilter(date, filteredCollected());
@@ -167,7 +136,9 @@ const FilterByValues = ({ setProducts, date }) => {
     };
 
     useEffect(() => {
-        searchProducts()
+        searchProducts();
+        localStorage.setItem('state', JSON.stringify({state}));
+        console.log(JSON.parse(localStorage.getItem('state')));
     }, [state]);
 
     return (
@@ -182,6 +153,7 @@ const FilterByValues = ({ setProducts, date }) => {
                                 key={filterProducer[i].id}
                                 id={filterProducer[i].id}
                                 img={filterProducer[i].img}
+                                checked={state.filters.producer[filterProducer[i].id]}
                                 onClick={() =>
                                     allFilterClickListener(filterProducer[i].id, 'producer')
                                 }
@@ -197,6 +169,7 @@ const FilterByValues = ({ setProducts, date }) => {
                                 key={filterCameras[i].id}
                                 id={filterCameras[i].id}
                                 quantity={filterCameras[i].numberOfCameras}
+                                checked={state.filters.numberOfCameras[filterCameras[i].id]}
                                 onClick={() =>
                                     allFilterClickListener(
                                         filterCameras[i].numberOfCameras,
@@ -215,6 +188,7 @@ const FilterByValues = ({ setProducts, date }) => {
                                 key={filterColor[i].id}
                                 id={filterColor[i].id}
                                 color={filterColor[i].color}
+                                checked={state.filters.color[filterColor[i].id]}
                                 onClick={() =>
                                     allFilterClickListener(filterColor[i].color, 'color')
                                 }
@@ -228,6 +202,7 @@ const FilterByValues = ({ setProducts, date }) => {
                         <Checkbox
                             id={filterPopular[0].id}
                             isPopular={filterPopular[0].isPopular}
+                            checked={state.filters.popular.isPopular}
                             onClick={() =>
                                 allFilterClickListener(filterPopular[0].isPopular, 'popular')
                             }
@@ -235,7 +210,7 @@ const FilterByValues = ({ setProducts, date }) => {
                     }
                 </div>
             </div>
-            <Search enterText={enterText} />
+            <Search enterText={enterText} dafaultValue={state.filters.search.inputTerm} />
             <Sort changeSort={changeSort} />
             <FilterByRanges setState={setState} />
         </div>

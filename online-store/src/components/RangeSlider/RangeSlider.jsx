@@ -6,7 +6,6 @@ import cl from './RangeSlider.module.css'
 
 const RangeSlider = ({ min, max, rangeBy, getRange }) => {
     const [value, setValue] = React.useState([min, max]);
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
         getRange(rangeBy, newValue[0], newValue[1]);
