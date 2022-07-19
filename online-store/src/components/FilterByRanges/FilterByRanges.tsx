@@ -1,10 +1,11 @@
 import React from 'react';
 import RangeSlider from '../RangeSlider/RangeSlider';
 import cl from './FilterByRanges.module.css';
+import { FilterByRangesProps } from './FilterByRanges.props';
 
 
-const FilterByRanges = ({ setState }) => {
-    const getRange = (rangeBy, min, max) => {
+const FilterByRanges = ({ setState }: FilterByRangesProps): JSX.Element => {
+    const getRange = (rangeBy: string, min: number, max: number) => {
         if (rangeBy === 'quantity') {
             setState((prevState) => ({
                 filters: {

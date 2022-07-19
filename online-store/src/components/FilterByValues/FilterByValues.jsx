@@ -1,24 +1,19 @@
-import React from 'react';
-import Checkbox from '../Checkbox/Checkbox';
-import cl from './FilterByValues.module.css';
+import React, { useEffect } from 'react';
 import {
-    filterProducer,
-    filterCameras,
-    filterColor,
-    filterPopular,
-} from './../../layout/Filters/filtersType';
-import { useState, useEffect } from 'react';
+    fromLessQuant, fromMoreQuant, fromOldYear,
+    fromYoungYear, sortFromA,
+    sortFromZ
+} from '../../utils/filterBy.js';
+import Checkbox from '../Checkbox/Checkbox';
+import FilterByRanges from '../FilterByRanges/FilterByRanges';
 import Search from '../Search/Search';
 import Sort from '../Sort/Sort';
-import FilterByRanges from '../FilterByRanges/FilterByRanges';
 import {
-    sortFromA,
-    sortFromZ,
-    fromMoreQuant,
-    fromLessQuant,
-    fromOldYear,
-    fromYoungYear,
-} from '../../utils/filterBy.js';
+    filterCameras,
+    filterColor,
+    filterPopular, filterProducer
+} from '../../layout/Filters/filtersType';
+import cl from './FilterByValues.module.css';
 
 const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
     const allFilterClickListener = (name, filterProp) => {
