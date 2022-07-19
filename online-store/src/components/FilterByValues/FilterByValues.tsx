@@ -3,7 +3,7 @@ import {
     fromLessQuant, fromMoreQuant, fromOldYear,
     fromYoungYear, sortFromA,
     sortFromZ
-} from '../../utils/filterBy.js';
+} from '../../utils/filterBy';
 import Checkbox from '../Checkbox/Checkbox';
 import FilterByRanges from '../FilterByRanges/FilterByRanges';
 import Search from '../Search/Search';
@@ -14,9 +14,11 @@ import {
     filterPopular, filterProducer
 } from '../../layout/Filters/filtersType';
 import cl from './FilterByValues.module.css';
+import { CollectedKeys, FilterByValuesProps } from './FilterByValues.props';
+import { Product } from '../../interfaces/product.interface';
 
-const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
-    const allFilterClickListener = (name, filterProp) => {
+const FilterByValues = ({ setProducts, date, setState, state, getSort }: FilterByValuesProps): JSX.Element=> {
+    const allFilterClickListener = (name: string, filterProp: string) => {
         setState((prevState) => ({
             filters: {
                 ...prevState.filters,
@@ -29,7 +31,7 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
     };
 
     const filteredCollected = () => {
-        const collectedTrueKeys = {
+        const collectedTrueKeys: CollectedKeys = {
             producer: [],
             numberOfCameras: [],
             color: [],
@@ -52,13 +54,13 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
         return collectedTrueKeys;
     };
 
-    const multiPropsFilter = (products, filters) => {
-        const filterKeys = Object.keys(filters);
+    const multiPropsFilter = (products: Product[], filters: CollectedKeys) => {
+        const filterKeys: string[] = Object.keys(filters);
         const res = products.filter((product) => {
             return filterKeys.every((key) => {
                 if (!filters[key].length) return true;
                 if (Array.isArray(product[key])) {
-                    return product[key].some((keyEle) => filters[key].includes(keyEle));
+                    return product[key].some((keyEle: any) => filters[key].includes(keyEle));
                 }
                 return filters[key].includes(product[key]);
             });
@@ -67,7 +69,7 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
         return res;
     };
 
-    const enterText = (e) => {
+    const enterText = (e: React.ChangeEvent<HTMLInputElement>) => {
         setState((prevState) => ({
             filters: {
                 ...prevState.filters,
@@ -78,7 +80,7 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
         }));
     };
 
-    const changeSort = (e) => {
+    const changeSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
         getSort(e.target.value);
         setState((prevState) => ({
             filters: {
@@ -90,7 +92,7 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
         }));
     };
 
-    const sortProducts = (value, arrSort) => {
+    const sortProducts = (value: string, arrSort: Product[]) => {
         switch (value) {
             case 'A':
                 return [...sortFromA(arrSort)];
@@ -109,7 +111,7 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
         }
     };
 
-    const changeRange = (arr) => {
+    const changeRange = (arr: Product[]) => {
         return arr.filter(
             (item) =>
                 item.quantity >= state.filters.range.quantityInStock[0] &&
@@ -132,8 +134,7 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }) => {
 
     useEffect(() => {
         searchProducts();
-        localStorage.setItem('state', JSON.stringify({state}));
-        console.log(JSON.parse(localStorage.getItem('state')));
+        localStorage.setItem('state', JSON.stringify({ state }));
     }, [state]);
 
     return (

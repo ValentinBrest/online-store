@@ -12,6 +12,7 @@ const Checkbox = ({ id, img, quantity, color, isPopular, onClick, checked }: Che
                 checked={checked}
                 className={cn(cl.custom__radio, cl.custom__color_radio)}
                 onClick={onClick}
+                onChange={(e) => {}}
             />
             <label
                 htmlFor={id}
@@ -22,7 +23,7 @@ const Checkbox = ({ id, img, quantity, color, isPopular, onClick, checked }: Che
                     [cl.label__grey]: isPopular == 'isPopular',
                 })}
             >
-                {quantity ? <span>{quantity}</span> : img ? <img src={img} alt="product"/> : ''}
+                {quantity ? <span>{quantity}</span> : img ? <img src={img} alt="product" /> : ''}
             </label>
         </>
     );

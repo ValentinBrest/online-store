@@ -3,5 +3,5 @@ import { DetailedHTMLProps, InputHTMLAttributes, SelectHTMLAttributes } from 're
 export interface SearchProps
     extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     enterText: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    dafaultValue: 'string';
+    dafaultValue: string;
 }

@@ -1,4 +1,6 @@
-export const filterProducer = [
+import { Producer, Camera, Color, Popular } from '../../interfaces/filter.interface';
+
+export const filterProducer: Producer[] = [
     {
         id: 'Apple',
         img: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg',
@@ -13,29 +15,29 @@ export const filterProducer = [
     },
 ];
 
-export const filterCameras = [
+export const filterCameras: Camera[] = [
     {
-        id: 1,
+        id: '1',
         numberOfCameras: '1',
     },
     {
-        id: 2,
+        id: '2',
         numberOfCameras: '2',
     },
     {
-        id: 3,
+        id: '3',
         numberOfCameras: '3',
     },
 ];
 
-export const filterColor = [
+export const filterColor: Color[] = [
     {
         id: 'white',
         color: 'white',
     },
     {
-        id: "yellow",
-        color: "yellow",
+        id: 'yellow',
+        color: 'yellow',
     },
     {
         id: 'red',
@@ -43,7 +45,7 @@ export const filterColor = [
     },
 ];
 
-export const filterPopular = [
+export const filterPopular: Popular[] = [
     {
         id: 'popular',
         value: false,
