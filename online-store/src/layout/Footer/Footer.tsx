@@ -1,7 +1,7 @@
 import React from 'react';
 import cl from './Footer.module.css'
 
-const Footer = () => {
+const Footer = ():JSX.Element => {
 	return (
         <div className={cl.footer}>
             <div className="container">
