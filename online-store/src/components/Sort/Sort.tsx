@@ -1,8 +1,9 @@
 import React from 'react';
 import cl from './Sort.module.css';
+import { SortProps } from './Sort.props';
 
 
-const Sort = ({ changeSort }) => {
+const Sort = ({ changeSort }:SortProps): JSX.Element => {
     return (
         <div className={cl.sort}>
             <div className={cl.title}>Сортировка</div>
