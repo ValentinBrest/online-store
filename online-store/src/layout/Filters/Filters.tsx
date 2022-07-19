@@ -38,7 +38,8 @@ const Filters = ({ setProducts, date }: FilterProps): JSX.Element => {
             },
         },
     };
-    const localState = JSON.parse(localStorage.getItem('state') || '')?.state;
+    // @ts-ignore
+    const localState = JSON.parse(localStorage.getItem('state'))?.state;
     const [state, setState] = useState(localState || defaultState);
     const [sort, setSort] = useState<string>('');
 
