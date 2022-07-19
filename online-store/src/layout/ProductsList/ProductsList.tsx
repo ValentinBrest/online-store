@@ -1,8 +1,9 @@
 import React from 'react';
 import Product from '../../components/Product/Product';
+import { ProductListProps } from './ProductList.props';
 import cl from './Products.module.css';
 
-const ProductsList = ({ setQuantityProducts, products, setDate, data, quantityProducts }) => {
+const ProductsList = ({ setQuantityProducts, products, setDate, data, quantityProducts }: ProductListProps): JSX.Element => {
     return (
         <div className={cl.products}>
             {products.length === 0 ? (
