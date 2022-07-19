@@ -3,8 +3,9 @@ import Button from '../../components/Button/Button';
 import FilterByValues from '../../components/FilterByValues/FilterByValues';
 import cl from './Filters.module.css';
 import { useState } from 'react';
+import { FilterProps } from './Filter.props';
 
-const Filters = ({ setProducts, date}) => {
+const Filters = ({ setProducts, date }: FilterProps): JSX.Element => {
     const defaultState = {
         filters: {
             sort: {
@@ -37,13 +38,13 @@ const Filters = ({ setProducts, date}) => {
             },
         },
     };
-    const localState = (JSON.parse(localStorage.getItem('state')))?.state ;
+    const localState = JSON.parse(localStorage.getItem('state') || '')?.state;
     const [state, setState] = useState(localState || defaultState);
-    const [sort, setSort] = useState('');
-    
-    const getSort = (value) => {
-        return setSort(value);
-    }
+    const [sort, setSort] = useState<string>('');
+
+    const getSort = (value: string) => {
+        setSort(value);
+    };
 
     const resetFilters = () => {
         setState({
@@ -52,11 +53,11 @@ const Filters = ({ setProducts, date}) => {
                 sort: { sortBy: sort },
             },
         });
-    }
+    };
 
     const resetSettings = () => {
         delete localStorage.state;
-    }
+    };
 
     return (
         <div className={cl.filters}>

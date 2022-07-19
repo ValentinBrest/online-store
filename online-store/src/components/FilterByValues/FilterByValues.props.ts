@@ -10,7 +10,7 @@ export interface FilterByValuesProps
     state: State;
     date: Product[];
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
-    getSort:(value: string) => React.Dispatch<React.SetStateAction<string>>;
+    getSort:(value: string) => void;
 }
 
 export interface CollectedKeys {
