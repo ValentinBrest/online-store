@@ -22,7 +22,7 @@ const Checkbox = ({ id, img, quantity, color, isPopular, onClick, checked }: Che
                     [cl.label__grey]: isPopular == 'isPopular',
                 })}
             >
-                {quantity ? <span>{quantity}</span> : <img src={img} alt="color" />}
+                {quantity ? <span>{quantity}</span> : img ? <img src={img} alt="product"/> : ''}
             </label>
         </>
     );
