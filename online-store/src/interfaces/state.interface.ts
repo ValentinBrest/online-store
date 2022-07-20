@@ -7,7 +7,7 @@ export interface State {
         numberOfCameras: NumberOfCameras;
         color: Color;
         popular: Popular;
-        [key: string]: Sort | Search | Range | ProducerAll | NumberOfCameras | Color | Popular | any ;
+        [key: string]: Sort | Search | Range | ProducerAll | NumberOfCameras | Color | Popular  ;
     };
 }
 

@@ -5,11 +5,13 @@ import Header from './layout/Header/Header';
 import ProductsList from './layout/ProductsList/ProductsList';
 import { useState } from 'react';
 import { date } from './products';
+import { Product } from './interfaces/product.interface';
+import React from 'react';
 
 function App() {
-    const [quantityProducts, setQuantityProducts] = useState(0);
-    const [data, setDate] = useState(date);
-    const [products, setProducts] = useState(data);
+    const [quantityProducts, setQuantityProducts] = useState<number>(0);
+    const [data, setDate] = useState<Product[]>(date);
+    const [products, setProducts] = useState<Product[]>(data);
 
     return (
         <div className="App">

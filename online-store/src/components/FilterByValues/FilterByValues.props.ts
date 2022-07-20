@@ -4,9 +4,7 @@ import { State } from '../../interfaces/state.interface';
 
 export interface FilterByValuesProps
     extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-    setState: React.Dispatch<
-        React.SetStateAction<State>
-    >;
+    setState: React.Dispatch<React.SetStateAction<State>>;
     state: State;
     date: Product[];
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>;

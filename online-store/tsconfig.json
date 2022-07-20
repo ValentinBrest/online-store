@@ -104,7 +104,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx"
-, "src/components/FilterByValues/FilterByValues.tsx", "src/utils/filterBy.ts"  ],
+, "src/components/FilterByValues/FilterByValues.tsx", "src/utils/filterBy.ts", "src/App.tsx"  ],
   "exclude": [
     "node_modules"
   ]

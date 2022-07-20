@@ -8,5 +8,5 @@ export interface Product {
     popular: string;
     img: string;
     isInCart: boolean;
-    [key: string]: any ;
+    // [key: string]: any ;
 }

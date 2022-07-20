@@ -19,7 +19,7 @@ const RangeSlider = ({ min, max, rangeBy, getRange }:RangeSliderProps): JSX.Elem
                 min={min}
                 max={max}
                 value={value}
-                // onChange={handleChange}
+                onChange={handleChange}
                 valueLabelDisplay="auto"
             />
             <div className={cl.valueRight}>{value[1]}</div>

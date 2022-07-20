@@ -1,4 +1,6 @@
-export const date = [
+import { Product } from './interfaces/product.interface';
+
+export const date: Product[] = [
     {
         title: 'Apple iPhone 11',
         quantity: 12,
