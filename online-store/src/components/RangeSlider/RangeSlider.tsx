@@ -6,10 +6,10 @@ import { RangeSliderProps } from './RangeSlider.props';
 
 
 const RangeSlider = ({ min, max, rangeBy, getRange }:RangeSliderProps): JSX.Element => {
-    const [value, setValue] = React.useState([min, max]);
-    const handleChange = (event: Event, newValue: number[]):void => {
-        setValue(newValue);
-        getRange(rangeBy, newValue[0], newValue[1]);
+    const [value, setValue] = React.useState<number[]>([min, max]);
+    const handleChange = (event: Event, newValue: number | number[]): void => {
+        setValue(newValue as number[]);
+        getRange(rangeBy, newValue);
     };
 
     return (

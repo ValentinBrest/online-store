@@ -5,14 +5,14 @@ import { FilterByRangesProps } from './FilterByRanges.props';
 
 
 const FilterByRanges = ({ setState }: FilterByRangesProps): JSX.Element => {
-    const getRange = (rangeBy: string, min: number, max: number) => {
+    const getRange = (rangeBy: string, newValue: number[] | number) => {
         if (rangeBy === 'quantity') {
             setState((prevState) => ({
                 filters: {
                     ...prevState.filters,
                     range: {
                         ...prevState.filters.range,
-                        quantityInStock: [min, max],
+                        quantityInStock: newValue,
                     },
                 },
             }));
@@ -22,7 +22,7 @@ const FilterByRanges = ({ setState }: FilterByRangesProps): JSX.Element => {
                     ...prevState.filters,
                     range: {
                         ...prevState.filters.range,
-                        yearOfRelease: [min, max],
+                        yearOfRelease: newValue,
                     },
                 },
             }));

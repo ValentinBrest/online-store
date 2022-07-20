@@ -20,8 +20,8 @@ export type Search = {
 };
 
 export type Range = {
-    quantityInStock: number[];
-    yearOfRelease: number[];
+    quantityInStock: number[] | number;
+    yearOfRelease: number[] | number;
 };
 
 export type ProducerAll = {

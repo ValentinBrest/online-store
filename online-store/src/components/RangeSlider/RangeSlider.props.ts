@@ -5,5 +5,5 @@ export interface RangeSliderProps
     min: number;
     max: number;
     rangeBy: string;
-    getRange: (rangeBy: string, min: number, max: number ) => void;
+    getRange: (rangeBy: string, newValue: number[] | number) => void;
 }
