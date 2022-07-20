@@ -6,7 +6,7 @@ export interface ProductsListProps
     extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     setQuantityProducts: React.Dispatch<React.SetStateAction<number>>;
     products: Product[];
-    setDate:([]) => React.Dispatch<React.SetStateAction<Product[]>>;
+    setDate:  React.Dispatch<React.SetStateAction<Product[]>>;
     data: Product[];
     quantityProducts: number;
 }

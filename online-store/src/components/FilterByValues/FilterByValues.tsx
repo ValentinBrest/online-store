@@ -113,11 +113,19 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }: FilterB
 
     const changeRange = (arr: Product[]) => {
         return arr.filter(
-            (item) =>
-                item.quantity >= state.filters.range.quantityInStock[0] &&
-                item.quantity <= state.filters.range.quantityInStock[1] &&
-                item.yearOfRelease >= state.filters.range.yearOfRelease[0] &&
-                item.yearOfRelease <= state.filters.range.yearOfRelease[1]
+            (item) => {
+                if (
+                    Array.isArray(state.filters.range.quantityInStock) &&
+                    Array.isArray(state.filters.range.yearOfRelease)
+                ) {
+                    return (
+                        item.quantity >= state.filters.range.quantityInStock[0] &&
+                        item.quantity <= state.filters.range.quantityInStock[1] &&
+                        item.yearOfRelease >= state.filters.range.yearOfRelease[0] &&
+                        item.yearOfRelease <= state.filters.range.yearOfRelease[1]
+                    );
+                }
+            }
         );
     };
 
