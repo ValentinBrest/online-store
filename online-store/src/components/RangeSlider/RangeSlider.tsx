@@ -5,24 +5,23 @@ import { RangeSliderProps } from './RangeSlider.props';
 
 
 
-const RangeSlider = ({ min, max, rangeBy, getRange }:RangeSliderProps): JSX.Element => {
-    const [value, setValue] = React.useState<number[]>([min, max]);
+const RangeSlider = ({ min, max, rangeBy, getRange, rValue, setRValue }:RangeSliderProps): JSX.Element => {
     const handleChange = (event: Event, newValue: number | number[]): void => {
-        setValue(newValue as number[]);
+        setRValue(newValue as number[]);
         getRange(rangeBy, newValue);
     };
 
     return (
         <div className={cl.range}>
-            <div className={cl.valueLeft}>{value[0]}</div>
+            <div className={cl.valueLeft}>{rValue[0]}</div>
             <Slider
                 min={min}
                 max={max}
-                value={value}
+                value={rValue}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
             />
-            <div className={cl.valueRight}>{value[1]}</div>
+            <div className={cl.valueRight}>{rValue[1]}</div>
         </div>
     );
 };

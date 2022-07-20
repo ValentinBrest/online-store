@@ -8,7 +8,11 @@ export interface FilterByValuesProps
     state: State;
     date: Product[];
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
-    getSort:(value: string) => void;
+    getSort: (value: string) => void;
+    r1Value: number[];
+    r2Value: number[];
+    setR1Value: React.Dispatch<React.SetStateAction<number[]>>;
+    setR2Value: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 export interface CollectedKeys {

@@ -7,12 +7,13 @@ import { ProductProps } from './Product.props';
 const Product = ({ setQuantityProducts, product, setDate, data, quantityProducts }: ProductProps) :JSX.Element => {
     const addCart = () => {
         if (!product.isInCart) {
-            setDate([...data, product.isInCart = true]);
+           
+            setDate([...data, {...product, isInCart: true}]);
             setQuantityProducts((prevCount) => {
                 return prevCount + 1;
             });
         } else {
-            setDate([...data, product.isInCart = false]);
+            setDate([...data, {...product, isInCart: false}]);
             setQuantityProducts((prevCount) => {
                 return prevCount - 1;
             });

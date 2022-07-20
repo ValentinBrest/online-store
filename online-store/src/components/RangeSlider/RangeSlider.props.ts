@@ -6,4 +6,6 @@ export interface RangeSliderProps
     max: number;
     rangeBy: string;
     getRange: (rangeBy: string, newValue: number[] | number) => void;
+    rValue: number[];
+    setRValue: React.Dispatch<React.SetStateAction<number[]>>;
 }

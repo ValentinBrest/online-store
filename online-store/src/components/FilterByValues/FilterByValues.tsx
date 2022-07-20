@@ -16,19 +16,55 @@ import {
 import cl from './FilterByValues.module.css';
 import { CollectedKeys, FilterByValuesProps } from './FilterByValues.props';
 import { Product } from '../../interfaces/product.interface';
+import { State } from '../../interfaces/state.interface';
 
-const FilterByValues = ({ setProducts, date, setState, state, getSort }: FilterByValuesProps): JSX.Element=> {
-    const allFilterClickListener = (name: string, filterProp: string) => {
-        setState((prevState) => ({
-            filters: {
-                ...prevState.filters,
-                [filterProp]: {
-                    ...prevState.filters[filterProp],
-                    [name]: !prevState.filters[filterProp][name],
+const myState: State = {
+    filters: {
+        sort: {
+            sortBy: '',
+        },
+        search: {
+            inputTerm: '',
+        },
+        range: {
+            quantityInStock: [1, 12],
+            yearOfRelease: [2000, 2022],
+        },
+        producer: {
+            Apple: false,
+            Samsung: false,
+            Xiaomi: false,
+        },
+        numberOfCameras: {
+            1: false,
+            2: false,
+            3: false,
+        },
+        color: {
+            white: false,
+            yellow: false,
+            red: false,
+        },
+        popular: {
+            isPopular: false,
+        },
+    },
+};
+type ObjectFilter = keyof typeof myState.filters;
+type ObjectName = keyof typeof myState.filters.name;
+
+const FilterByValues = ({ setProducts, date, setState, state, getSort, r1Value, r2Value, setR1Value, setR2Value}: FilterByValuesProps): JSX.Element=> {
+        const allFilterClickListener = (name: ObjectName, filterProp: ObjectFilter) => {
+            setState((prevState) => ({
+                filters: {
+                    ...prevState.filters,
+                    [filterProp]: {
+                        ...prevState.filters[filterProp],
+                        [name]: !prevState.filters[filterProp][name],
+                    },
                 },
-            },
-        }));
-    };
+            }));
+        };
 
     const filteredCollected = () => {
         const collectedTrueKeys: CollectedKeys = {
@@ -59,10 +95,13 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }: FilterB
         const res = products.filter((product) => {
             return filterKeys.every((key) => {
                 if (!filters[key].length) return true;
-                if (Array.isArray(product[key])) {
-                    return product[key].some((keyEle: any) => filters[key].includes(keyEle));
+                if (Array.isArray(product[key as keyof Product] )) {
+                    // @ts-ignore
+                    return product[key as keyof Product].some((keyEle: string) =>
+                        filters[key].includes(keyEle)
+                    );
                 }
-                return filters[key].includes(product[key]);
+                return filters[key].includes(product[key as keyof Product].toString());
             });
         });
         setProducts(res);
@@ -151,15 +190,15 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }: FilterB
             <div className={cl.filter__wrap}>
                 <div className={cl.producer}>
                     <span>Производитель:</span>
-                    {filterProducer.map((_, i) => {
+                    {filterProducer.map((element) => {
                         return (
                             <Checkbox
-                                key={filterProducer[i].id}
-                                id={filterProducer[i].id}
-                                img={filterProducer[i].img}
-                                checked={state.filters.producer[filterProducer[i].id]}
+                                key={element.id}
+                                id={element.id}
+                                img={element.img}
+                                checked={state.filters.producer[element.id]}
                                 onClick={() =>
-                                    allFilterClickListener(filterProducer[i].id, 'producer')
+                                    allFilterClickListener(element.id as ObjectName, 'producer')
                                 }
                             />
                         );
@@ -167,16 +206,16 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }: FilterB
                 </div>
                 <div className={cl.cameras}>
                     <span>Количество камер:</span>
-                    {filterCameras.map((_, i) => {
+                    {filterCameras.map((element) => {
                         return (
                             <Checkbox
-                                key={filterCameras[i].id}
-                                id={filterCameras[i].id}
-                                quantity={filterCameras[i].numberOfCameras}
-                                checked={state.filters.numberOfCameras[filterCameras[i].id]}
+                                key={element.id}
+                                id={element.id}
+                                quantity={element.numberOfCameras}
+                                checked={state.filters.numberOfCameras[element.id]}
                                 onClick={() =>
                                     allFilterClickListener(
-                                        filterCameras[i].numberOfCameras,
+                                        element.numberOfCameras as ObjectName,
                                         'numberOfCameras'
                                     )
                                 }
@@ -186,15 +225,15 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }: FilterB
                 </div>
                 <div className={cl.color}>
                     <span>Цвет:</span>
-                    {filterColor.map((_, i) => {
+                    {filterColor.map((element) => {
                         return (
                             <Checkbox
-                                key={filterColor[i].id}
-                                id={filterColor[i].id}
-                                color={filterColor[i].color}
-                                checked={state.filters.color[filterColor[i].id]}
+                                key={element.id}
+                                id={element.id}
+                                color={element.color}
+                                checked={state.filters.color[element.id]}
                                 onClick={() =>
-                                    allFilterClickListener(filterColor[i].color, 'color')
+                                    allFilterClickListener(element.color as ObjectName, 'color')
                                 }
                             />
                         );
@@ -208,7 +247,10 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }: FilterB
                             isPopular={filterPopular[0].isPopular}
                             checked={state.filters.popular.isPopular}
                             onClick={() =>
-                                allFilterClickListener(filterPopular[0].isPopular, 'popular')
+                                allFilterClickListener(
+                                    filterPopular[0].isPopular as ObjectName,
+                                    'popular'
+                                )
                             }
                         />
                     }
@@ -216,7 +258,13 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort }: FilterB
             </div>
             <Search enterText={enterText} dafaultValue={state.filters.search.inputTerm} />
             <Sort changeSort={changeSort} />
-            <FilterByRanges setState={setState} />
+            <FilterByRanges
+                setState={setState}
+                r1Value={r1Value}
+                r2Value={r2Value}
+                setR1Value={setR1Value}
+                setR2Value={setR2Value}
+            />
         </div>
     );
 };

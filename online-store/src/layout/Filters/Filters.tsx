@@ -42,6 +42,8 @@ const Filters = ({ setProducts, date }: FilterProps): JSX.Element => {
     const localState = JSON.parse(localStorage.getItem('state'))?.state;
     const [state, setState] = useState(localState || defaultState);
     const [sort, setSort] = useState<string>('');
+    const [r1Value, setR1Value] = React.useState<number[]>([1, 12]);
+    const [r2Value, setR2Value] = React.useState<number[]>([2000, 2022]);
 
     const getSort = (value: string) => {
         setSort(value);
@@ -54,6 +56,8 @@ const Filters = ({ setProducts, date }: FilterProps): JSX.Element => {
                 sort: { sortBy: sort },
             },
         });
+        setR1Value([1, 12])
+        setR2Value([2000, 2022]);
     };
 
     const resetSettings = () => {
@@ -74,6 +78,10 @@ const Filters = ({ setProducts, date }: FilterProps): JSX.Element => {
                 state={state}
                 setState={setState}
                 getSort={getSort}
+                r1Value={r1Value}
+                r2Value={r2Value}
+                setR1Value={setR1Value}
+                setR2Value={setR2Value}
             />
         </div>
     );
