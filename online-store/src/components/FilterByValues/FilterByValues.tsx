@@ -95,12 +95,6 @@ const FilterByValues = ({ setProducts, date, setState, state, getSort, r1Value, 
         const res = products.filter((product) => {
             return filterKeys.every((key) => {
                 if (!filters[key].length) return true;
-                if (Array.isArray(product[key as keyof Product] )) {
-                    // @ts-ignore
-                    return product[key as keyof Product].some((keyEle: string) =>
-                        filters[key].includes(keyEle)
-                    );
-                }
                 return filters[key].includes(product[key as keyof Product].toString());
             });
         });
