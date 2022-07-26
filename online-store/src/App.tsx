@@ -22,7 +22,7 @@ function App() {
                         <Filters date={data} setProducts={setProducts} />
                         <ProductsList
                             data={data}
-                            setDate={setDate}
+                            setProducts={setProducts}
                             setQuantityProducts={setQuantityProducts}
                             products={products}
                             quantityProducts={quantityProducts}

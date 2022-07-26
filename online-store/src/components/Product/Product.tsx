@@ -2,18 +2,29 @@ import React from 'react';
 import cl from './Product.module.css';
 import Button from '../Button/Button';
 import { ProductProps } from './Product.props';
+import { Product } from '../../interfaces/product.interface';
 
 
-const Product = ({ setQuantityProducts, product, setDate, data, quantityProducts }: ProductProps) :JSX.Element => {
+const Prod = ({ setQuantityProducts, product, setProducts, products, quantityProducts }: ProductProps) :JSX.Element => {
+    const getNewData = (data: Product[], title: string, value:boolean) => {
+        data.forEach((item) => {
+        if (item.title === title) {
+            item.isInCart = value;
+        }
+        return item
+       })
+       return data
+    }
     const addCart = () => {
         if (!product.isInCart) {
-           
-            setDate([...data, {...product, isInCart: true}]);
+            const newData = getNewData(products, product.title, true);
+            setProducts([...newData]);
             setQuantityProducts((prevCount) => {
                 return prevCount + 1;
             });
         } else {
-            setDate([...data, {...product, isInCart: false}]);
+            const newData = getNewData(products, product.title, false);
+            setProducts([...newData]);
             setQuantityProducts((prevCount) => {
                 return prevCount - 1;
             });
@@ -33,11 +44,9 @@ const Product = ({ setQuantityProducts, product, setDate, data, quantityProducts
                 <div className={cl.price}>Производитель: {product.producer}</div>
                 <div className={cl.color}>Цвет: {color}</div>
                 <div className={cl.cameras}>Количество камер: {product.numberOfCameras}</div>
-                <div className={cl.popular}>
-                    Популярный: {product.popular === 'isPopular' ? 'Да' : 'Нет'}
-                </div>
+                <div className={cl.popular}>Популярный: {product.popular === 'isPopular' ? 'Да' : 'Нет'}</div>
             </div>
-            <Button className={product.isInCart ? cl.buttonToCart : cl.button} onClick={addCart}>
+            <Button className={product.isInCart ? cl.buttonToCart : cl.button}  onClick={addCart}>
                 {quantityProducts >= 20 && !product.isInCart
                     ? 'Извините, все слоты заполнены'
                     : quantityProducts < 20 && !product.isInCart
@@ -48,4 +57,4 @@ const Product = ({ setQuantityProducts, product, setDate, data, quantityProducts
     );
 };
 
-export default Product;
+export default Prod;

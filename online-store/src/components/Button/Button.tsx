@@ -5,14 +5,9 @@ import React from 'react';
 
 const Button = ({ children, className, onClick, ...props }: ButtonProps): JSX.Element => {
     return (
-        <button 
-			className={cn(cl.button, className)} 
-			onClick={onClick} 
-			{...props}
-		>
+        <button className={cn(cl.button, className)} onClick={onClick} {...props}>
             {children}
         </button>
     );
 };
-
 export default Button;

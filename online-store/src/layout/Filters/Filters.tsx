@@ -6,17 +6,21 @@ import { useState } from 'react';
 import { FilterProps } from './Filter.props';
 
 const Filters = ({ setProducts, date }: FilterProps): JSX.Element => {
+    const [sort, setSort] = useState<string>('');
+    const [r1Value, setR1Value] = React.useState<number[]>([1, 12]);
+    const [r2Value, setR2Value] = React.useState<number[]>([2000, 2022]);
+
     const defaultState = {
         filters: {
             sort: {
-                sortBy: '',
+                sortBy: sort,
             },
             search: {
                 inputTerm: '',
             },
             range: {
-                quantityInStock: [1, 12],
-                yearOfRelease: [2000, 2022],
+                quantityInStock: r1Value,
+                yearOfRelease: r2Value,
             },
             producer: {
                 Apple: false,
@@ -38,12 +42,10 @@ const Filters = ({ setProducts, date }: FilterProps): JSX.Element => {
             },
         },
     };
+
     // @ts-ignore
     const localState = JSON.parse(localStorage.getItem('state'))?.state;
     const [state, setState] = useState(localState || defaultState);
-    const [sort, setSort] = useState<string>('');
-    const [r1Value, setR1Value] = React.useState<number[]>([1, 12]);
-    const [r2Value, setR2Value] = React.useState<number[]>([2000, 2022]);
 
     const getSort = (value: string) => {
         setSort(value);
@@ -56,12 +58,13 @@ const Filters = ({ setProducts, date }: FilterProps): JSX.Element => {
                 sort: { sortBy: sort },
             },
         });
-        setR1Value([1, 12])
+        setR1Value([1, 12]);
         setR2Value([2000, 2022]);
     };
 
     const resetSettings = () => {
         delete localStorage.state;
+        window.location.reload();
     };
 
     return (

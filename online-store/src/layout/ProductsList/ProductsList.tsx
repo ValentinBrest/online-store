@@ -3,7 +3,7 @@ import Product from '../../components/Product/Product';
 import { ProductsListProps } from './ProductsList.props';
 import cl from './ProductsList.module.css';
 
-const ProductsList = ({ setQuantityProducts, products, setDate, data, quantityProducts }: ProductsListProps): JSX.Element => {
+const ProductsList = ({ setQuantityProducts, products, setProducts, data, quantityProducts }: ProductsListProps): JSX.Element => {
     return (
         <div className={cl.products}>
             {products.length === 0 ? (
@@ -12,11 +12,11 @@ const ProductsList = ({ setQuantityProducts, products, setDate, data, quantityPr
                 products.map((item) => {
                     return (
                         <Product
-                            data={data}
+                            products={products}
                             product={item}
                             key={item.title}
                             setQuantityProducts={setQuantityProducts}
-                            setDate={setDate}
+                            setProducts={setProducts}
                             quantityProducts={quantityProducts}
                         />
                     );

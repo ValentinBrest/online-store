@@ -21,3 +21,9 @@
   gap: 20px;
   position: relative;
 }
+
+@media (max-width: 1200px) {
+  .main__wrap {
+    grid-template-columns: 1fr;
+  }
+}
